@@ -13,7 +13,7 @@ export default function App() {
       </Text>
 
       <Link
-        href="/onborading"
+        href="/onboarding"
         className="mt-4 rounded bg-primary p-4 text-white"
       >
         Go to Onboarding

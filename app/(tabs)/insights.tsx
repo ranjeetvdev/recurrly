@@ -4,12 +4,12 @@ import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
-const insights = () => {
+const Insights = () => {
   return (
     <SafeAreaView className="p-5 bg-background flex-1">
-      <Text>insights</Text>
+      <Text>Insights</Text>
     </SafeAreaView>
   );
 };
 
-export default insights;
+export default Insights;
