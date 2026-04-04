@@ -1,12 +1,15 @@
-import React from "react";
-import { Text, View } from "react-native";
+import { styled } from "nativewind";
+import { Text } from "react-native";
+import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
-const settings = () => {
+const SafeAreaView = styled(RNSafeAreaView);
+
+const Settings = () => {
   return (
-    <View>
-      <Text>settings</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-background p-5">
+      <Text>Settings</Text>
+    </SafeAreaView>
   );
 };
 
-export default settings;
+export default Settings;
