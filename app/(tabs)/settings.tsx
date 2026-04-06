@@ -4,24 +4,18 @@ import { Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
 import images from "@/constants/images";
-// import { usePostHog } from 'posthog-react-native';
 
 const SafeAreaView = styled(RNSafeAreaView);
 
 const Settings = () => {
   const { signOut } = useClerk();
   const { user } = useUser();
-  // const postHog = usePostHog();
 
   const handleSignOut = async () => {
-    // postHog.capture('user_signed_out');
     try {
       await signOut();
-      // Only reset analytics after successful sign-out
-      // postHog.reset();
     } catch (error) {
       console.error("Sign-out failed:", error);
-      // Don't reset analytics if sign-out failed
     }
   };
 

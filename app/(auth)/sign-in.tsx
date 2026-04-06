@@ -1,4 +1,4 @@
-import { useSignIn } from "@clerk/expo";
+import { useAuth, useSignIn } from "@clerk/expo";
 import { Link, useRouter, type Href } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
@@ -12,22 +12,22 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
-// import { usePostHog } from 'posthog-react-native';
 
 const SafeAreaView = styled(RNSafeAreaView);
 
 const SignIn = () => {
   const { signIn, errors, fetchStatus } = useSignIn();
+  const { isSignedIn } = useAuth();
   const router = useRouter();
-  // const postHog = usePostHog();
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
-
-  // Validation states
+  const [code, setCode] = useState(""); // Validation states
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
+
+  // Don't say sign-in if already authenticated
+  if (isSignedIn) return null;
 
   // Client-side validation
   const emailValid =
@@ -47,9 +47,6 @@ const SignIn = () => {
 
     if (error) {
       console.error(JSON.stringify(error, null, 2));
-      // postHog.capture('user_sign_in_failed', {
-      //     error_message: error.message,
-      // });
       return;
     }
 
@@ -60,12 +57,6 @@ const SignIn = () => {
             console.log(session?.currentTask);
             return;
           }
-
-          // postHog.identify(emailAddress, {
-          //     $set: { email: emailAddress },
-          //     $set_once: { first_sign_in_date: new Date().toISOString() },
-          // });
-          // postHog.capture('user_signed_in', { email: emailAddress });
 
           const url = decorateUrl("/(tabs)");
           if (url.startsWith("http")) {
@@ -108,13 +99,6 @@ const SignIn = () => {
             console.log(session?.currentTask);
             return;
           }
-
-          // Track successful sign-in after verification
-          // postHog.identify(emailAddress, {
-          //     $set: { email: emailAddress },
-          //     $set_once: { first_sign_in_date: new Date().toISOString() },
-          // });
-          // postHog.capture('user_signed_in', { email: emailAddress });
 
           const url = decorateUrl("/(tabs)");
           if (url.startsWith("http")) {
