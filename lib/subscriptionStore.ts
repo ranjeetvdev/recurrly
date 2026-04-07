@@ -12,7 +12,11 @@ export const useSubscriptionStore = create<SubscriptionStore>((set) => ({
   subscriptions: HOME_SUBSCRIPTIONS,
 
   addSubscription: (subscription) =>
-    set((state) => ({ subscriptions: [subscription, ...state.subscriptions] })),
+    set((state) => {
+      const exists = state.subscriptions.some((s) => s.id === subscription.id);
+      if (exists) return state;
+      return { subscriptions: [subscription, ...state.subscriptions] };
+    }),
 
   setSubscriptions: (subscriptions) => set({ subscriptions }),
 }));
