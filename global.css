@@ -258,11 +258,11 @@
     @apply text-2xl font-sans-extrabold text-background;
   }
 
-  .auth-wordmark {
+  .auth-word-mark {
     @apply text-3xl font-sans-extrabold text-primary;
   }
 
-  .auth-wordmark-sub {
+  .auth-word-mark-sub {
     @apply -mt-1 text-xs font-sans-semibold uppercase tracking-[1px] text-muted-foreground;
   }
 
