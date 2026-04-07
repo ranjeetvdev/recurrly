@@ -78,7 +78,7 @@ const SubscriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {(category?.trim() || plan?.trim()) ?? fallback}
+                  {category?.trim() || plan?.trim() || fallback}
                 </Text>
               </View>
             </View>
