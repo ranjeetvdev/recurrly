@@ -63,7 +63,11 @@ const Subscriptions = () => {
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         ListEmptyComponent={
-          <Text className="home-empty-state">No subscriptions yet.</Text>
+          <Text className="home-empty-state">
+            {searchQuery.trim()
+              ? "No subscriptions match your search"
+              : "No subscriptions yet."}
+          </Text>
         }
       />
     </SafeAreaView>
