@@ -70,7 +70,12 @@ export default function App() {
                 </Text>
               </View>
 
-              <Pressable onPress={() => setIsModelVisible(true)}>
+              <Pressable
+                onPress={() => setIsModelVisible(true)}
+                accessibilityRole="button"
+                accessibilityLabel="Add subscription"
+                accessibilityHint="Open the form to create a new subscription"
+              >
                 <Image source={icons.add} className="home-add-icon" />
               </Pressable>
             </View>
