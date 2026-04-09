@@ -39,9 +39,9 @@ const SubscriptionCard = ({
               {name}
             </Text>
             <Text className="sub-meta" numberOfLines={1} ellipsizeMode="tail">
-              {category?.trim() || plan?.trim() || renewalDate
+              {renewalDate
                 ? formatSubscriptionDateTime(renewalDate)
-                : ""}
+                : category?.trim() || plan?.trim() || ""}
             </Text>
           </View>
         </View>
