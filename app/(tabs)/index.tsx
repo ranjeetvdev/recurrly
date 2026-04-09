@@ -14,6 +14,7 @@ import images from "@/constants/images";
 import { useSubscriptionStore } from "@/lib/subscriptionStore";
 import { formatCurrency } from "@/lib/utils";
 import { useUser } from "@clerk/expo";
+import { router } from "expo-router";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
@@ -46,7 +47,7 @@ export default function App() {
   const displayName =
     user?.firstName ||
     user?.fullName ||
-    user?.emailAddresses[0]?.emailAddress ||
+    user?.emailAddresses?.[0]?.emailAddress ||
     "User";
 
   return (
@@ -115,7 +116,12 @@ export default function App() {
               />
             </View>
 
-            <ListHeading title="All Subscriptions" />
+            <ListHeading
+              title="All Subscriptions"
+              onPress={() => {
+                router.push("/(tabs)/subscriptions");
+              }}
+            />
           </>
         )}
         data={subscriptions}
