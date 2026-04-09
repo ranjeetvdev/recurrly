@@ -50,9 +50,7 @@ const SignUp = () => {
     }
 
     // Send verification email
-    if (!error) {
-      await signUp.verifications.sendEmailCode();
-    }
+    await signUp.verifications.sendEmailCode();
   };
 
   const handleVerify = async () => {
