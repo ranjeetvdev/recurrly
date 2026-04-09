@@ -1,21 +1,20 @@
 import dayjs from "dayjs";
 import { styled } from "nativewind";
 import { useState } from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
+import CreateSubscriptionModal from "@/components/CreateSubscriptionModal";
 import ListHeading from "@/components/ListHeading";
 import SubscriptionCard from "@/components/SubscriptionCard";
 import UpcomingSubscriptionCard from "@/components/UpcomingSubscriptionCard";
-import {
-  HOME_BALANCE,
-  HOME_SUBSCRIPTIONS,
-  UPCOMING_SUBSCRIPTIONS,
-} from "@/constants/data";
+import { HOME_BALANCE, UPCOMING_SUBSCRIPTIONS } from "@/constants/data";
 import { icons } from "@/constants/icons";
 import images from "@/constants/images";
+import { useSubscriptionStore } from "@/lib/subscriptionStore";
 import { formatCurrency } from "@/lib/utils";
 import { useUser } from "@clerk/expo";
+import { router } from "expo-router";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
@@ -25,11 +24,30 @@ export default function App() {
     string | null
   >(null);
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { subscriptions, addSubscription } = useSubscriptionStore();
+
+  // const upcomingSubscriptions = useMemo(() => {
+  //   const now = dayjs();
+  //   const nextWeek = now.add(7, "days");
+  //   return subscriptions
+  //     .filter(
+  //       (subscription) =>
+  //         subscription.status === "active" &&
+  //         dayjs(subscription.renewalDate).isAfter(now) &&
+  //         dayjs(subscription.renewalDate).isBefore(nextWeek),
+  //     )
+  //     .sort((a, b) => dayjs(a.renewalDate).diff(dayjs(b.renewalDate)));
+  // }, [subscriptions]);
+
+  const handleCreateSubscription = (newSubscription: Subscription) => {
+    addSubscription(newSubscription);
+  };
   // Get user display: firstName, fullName or email
   const displayName =
     user?.firstName ||
     user?.fullName ||
-    user?.emailAddresses[0].emailAddress ||
+    user?.emailAddresses?.[0]?.emailAddress ||
     "User";
 
   return (
@@ -46,10 +64,21 @@ export default function App() {
                   }
                   className="home-avatar"
                 />
-                <Text className="home-user-name">{displayName}</Text>
+                <Text className="home-user-name">
+                  {displayName.length > 14
+                    ? displayName.slice(0, 14) + "..."
+                    : displayName}
+                </Text>
               </View>
 
-              <Image source={icons.add} className="home-add-icon" />
+              <Pressable
+                onPress={() => setIsModalVisible(true)}
+                accessibilityRole="button"
+                accessibilityLabel="Add subscription"
+                accessibilityHint="Open the form to create a new subscription"
+              >
+                <Image source={icons.add} className="home-add-icon" />
+              </Pressable>
             </View>
 
             {/* Balance Card */}
@@ -72,7 +101,7 @@ export default function App() {
               <ListHeading title="Upcoming" />
 
               <FlatList
-                data={UPCOMING_SUBSCRIPTIONS}
+                data={UPCOMING_SUBSCRIPTIONS} // data={upcomingSubscriptions}
                 renderItem={({ item }) => (
                   <UpcomingSubscriptionCard {...item} />
                 )}
@@ -87,10 +116,15 @@ export default function App() {
               />
             </View>
 
-            <ListHeading title="All Subscriptions" />
+            <ListHeading
+              title="All Subscriptions"
+              onPress={() => {
+                router.push("/(tabs)/subscriptions");
+              }}
+            />
           </>
         )}
-        data={HOME_SUBSCRIPTIONS}
+        data={subscriptions}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <SubscriptionCard
@@ -109,7 +143,13 @@ export default function App() {
         ListEmptyComponent={
           <Text className="home-empty-state">No subscriptions yet.</Text>
         }
-        contentContainerClassName="pb-30"
+        contentContainerClassName="pb-26"
+      />
+
+      <CreateSubscriptionModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onSubmit={handleCreateSubscription}
       />
     </SafeAreaView>
   );

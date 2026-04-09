@@ -39,26 +39,36 @@ const SignUp = () => {
   const handleSubmit = async () => {
     if (!formValid) return;
 
-    const { error } = await signUp.password({
-      emailAddress,
-      password,
-    });
-
-    if (error) {
-      console.error(JSON.stringify(error, null, 2));
-      return;
-    }
-
-    // Send verification email
-    if (!error) {
+    try {
+      const { error } = await signUp.password({
+        emailAddress,
+        password,
+      });
+      if (error) {
+        console.error(JSON.stringify(error, null, 2));
+        return;
+      }
+      // Send verification email
       await signUp.verifications.sendEmailCode();
+    } catch (err) {
+      console.error("Failed to initiate email verification:", err);
     }
   };
 
   const handleVerify = async () => {
-    await signUp.verifications.verifyEmailCode({
-      code,
-    });
+    try {
+      const { error } = await signUp.verifications.verifyEmailCode({
+        code,
+      });
+
+      if (error) {
+        console.error("Verification failed:", JSON.stringify(error, null, 2));
+        return;
+      }
+    } catch (err) {
+      console.error("Verification error:", err);
+      return;
+    }
 
     if (signUp.status === "complete") {
       await signUp.finalize({
@@ -86,7 +96,6 @@ const SignUp = () => {
       console.error("Sign-up attempt not complete:", signUp);
     }
   };
-
   // Don't show anything if already signed in or sign-up is complete
   if (signUp.status === "complete" || isSignedIn) {
     return null;

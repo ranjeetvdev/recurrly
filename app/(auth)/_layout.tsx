@@ -7,9 +7,8 @@ const AuthLayout = () => {
   // Wait for auth to load before rendering anything
   if (!isLoaded) return null;
 
-  // Redirect to home if use is already signed in
+  // Redirect to home if user is already signed in
   if (isSignedIn) return <Redirect href="/(tabs)" />;
-
   return (
     <Stack
       screenOptions={{

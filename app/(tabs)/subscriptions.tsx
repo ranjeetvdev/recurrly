@@ -19,25 +19,21 @@ const Subscriptions = () => {
       subscription.category
         ?.toLowerCase()
         .includes(searchQuery.toLowerCase()) ||
-      subscription.plan
-        ?.toLowerCase()
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase()),
+      subscription.plan?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-
   return (
     <SafeAreaView className="bg-background flex-1">
       <FlatList
         data={filteredSubscriptions}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
-          <View className="px-5 pt-5">
+          <View className="pt-5">
             <Text className="text-3xl font-bold text-dark mb-5">
-              Subscriptions
+              All Subscriptions
             </Text>
 
             <TextInput
-              className="bg-card rounded-xl px-4 py-3 text-dark mb-4"
+              className="bg-card border-border border rounded-xl px-4 py-3 text-dark mb-4"
               placeholder="Search subscriptions..."
               placeholderTextColor="#666"
               value={searchQuery}
@@ -56,14 +52,18 @@ const Subscriptions = () => {
         )}
         contentContainerStyle={{
           paddingHorizontal: 20,
-          paddingBottom: 100,
-          gap: 12,
+          paddingBottom: 111,
+          gap: 16,
         }}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         ListEmptyComponent={
-          <Text className="home-empty-state">No subscriptions yet.</Text>
+          <Text className="home-empty-state">
+            {searchQuery.trim()
+              ? "No subscriptions match your search"
+              : "No subscriptions yet."}
+          </Text>
         }
       />
     </SafeAreaView>
