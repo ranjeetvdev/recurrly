@@ -19,12 +19,8 @@ const Subscriptions = () => {
       subscription.category
         ?.toLowerCase()
         .includes(searchQuery.toLowerCase()) ||
-      subscription.plan
-        ?.toLowerCase()
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase()),
+      subscription.plan?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-
   return (
     <SafeAreaView className="bg-background flex-1">
       <FlatList
