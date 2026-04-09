@@ -90,7 +90,12 @@ const SignIn = () => {
   };
 
   const handleVerify = async () => {
-    await signIn.mfa.verifyEmailCode({ code });
+    const { error } = await signIn.mfa.verifyEmailCode({ code });
+
+    if (error) {
+      console.log("Verification failed:", JSON.stringify(error, null, 2));
+      return;
+    }
 
     if (signIn.status === "complete") {
       await signIn.finalize({
