@@ -64,7 +64,9 @@ export default function App() {
                   className="home-avatar"
                 />
                 <Text className="home-user-name">
-                  {displayName.slice(0, 14) + "..."}
+                  {displayName.length > 14
+                    ? displayName.slice(0, 14) + "..."
+                    : displayName}
                 </Text>
               </View>
 
