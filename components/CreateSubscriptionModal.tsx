@@ -196,7 +196,7 @@ const CreateSubscriptionModal = ({
                   <Pressable
                     className={clsx(
                       "picker-option",
-                      frequency === "Yearly" && "Picker-option-active",
+                      frequency === "Yearly" && "picker-option-active",
                     )}
                     onPress={() => setFrequency("Yearly")}
                   >
