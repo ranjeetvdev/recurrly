@@ -23,7 +23,7 @@ export default function App() {
     string | null
   >(null);
 
-  const [isModalVisible, setIsModelVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { subscriptions, addSubscription } = useSubscriptionStore();
 
   // const upcomingSubscriptions = useMemo(() => {
@@ -46,7 +46,7 @@ export default function App() {
   const displayName =
     user?.firstName ||
     user?.fullName ||
-    user?.emailAddresses[0].emailAddress ||
+    user?.emailAddresses[0]?.emailAddress ||
     "User";
 
   return (
@@ -71,7 +71,7 @@ export default function App() {
               </View>
 
               <Pressable
-                onPress={() => setIsModelVisible(true)}
+                onPress={() => setIsModalVisible(true)}
                 accessibilityRole="button"
                 accessibilityLabel="Add subscription"
                 accessibilityHint="Open the form to create a new subscription"
@@ -142,7 +142,7 @@ export default function App() {
 
       <CreateSubscriptionModal
         visible={isModalVisible}
-        onClose={() => setIsModelVisible(false)}
+        onClose={() => setIsModalVisible(false)}
         onSubmit={handleCreateSubscription}
       />
     </SafeAreaView>
