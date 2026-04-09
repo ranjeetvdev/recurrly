@@ -23,7 +23,7 @@ export default function App() {
     string | null
   >(null);
 
-  const [isModalVisible, setIsModeVisible] = useState(false);
+  const [isModalVisible, setIsModelVisible] = useState(false);
   const { subscriptions, addSubscription } = useSubscriptionStore();
 
   // const upcomingSubscriptions = useMemo(() => {
@@ -68,7 +68,7 @@ export default function App() {
                 </Text>
               </View>
 
-              <Pressable onPress={() => setIsModeVisible(true)}>
+              <Pressable onPress={() => setIsModelVisible(true)}>
                 <Image source={icons.add} className="home-add-icon" />
               </Pressable>
             </View>
@@ -135,7 +135,7 @@ export default function App() {
 
       <CreateSubscriptionModal
         visible={isModalVisible}
-        onClose={() => setIsModeVisible(false)}
+        onClose={() => setIsModelVisible(false)}
         onSubmit={handleCreateSubscription}
       />
     </SafeAreaView>
