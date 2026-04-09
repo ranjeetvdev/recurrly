@@ -39,18 +39,20 @@ const SignUp = () => {
   const handleSubmit = async () => {
     if (!formValid) return;
 
-    const { error } = await signUp.password({
-      emailAddress,
-      password,
-    });
-
-    if (error) {
-      console.error(JSON.stringify(error, null, 2));
-      return;
+    try {
+      const { error } = await signUp.password({
+        emailAddress,
+        password,
+      });
+      if (error) {
+        console.error(JSON.stringify(error, null, 2));
+        return;
+      }
+      // Send verification email
+      await signUp.verifications.sendEmailCode();
+    } catch (err) {
+      console.error("Failed to initiate email verification:", err);
     }
-
-    // Send verification email
-    await signUp.verifications.sendEmailCode();
   };
 
   const handleVerify = async () => {
