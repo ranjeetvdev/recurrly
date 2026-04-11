@@ -44,6 +44,7 @@ const Insights = () => {
       <Text className="text-3xl font-sans-bold text-primary mb-6">
         Monthly Insights
       </Text>
+
       {/* Upcoming */}
       <ListHeading
         title="Upcoming"
@@ -51,6 +52,7 @@ const Insights = () => {
           router.push("/(tabs)");
         }}
       />
+
       {/* Chart Card */}
       <View className="rounded-2xl bg-muted p-5 mb-6">
         <View className="flex-row items-end justify-between h-36">
@@ -82,6 +84,7 @@ const Insights = () => {
           })}
         </View>
       </View>
+
       {/* Expenses */}
       <View className="rounded-2xl bg-card p-5 mb-6 border border-border flex-row justify-between">
         <View>
@@ -90,6 +93,7 @@ const Insights = () => {
             {dayjs().format("MMMM YYYY")}
           </Text>
         </View>
+
         <View>
           <Text className="text-xl font-sans-extrabold text-primary">
             -$424.63
@@ -99,6 +103,7 @@ const Insights = () => {
           </Text>
         </View>
       </View>
+
       {/* History */}
       <ListHeading title="History" onPress={() => {}} />
       <FlatList
@@ -113,6 +118,7 @@ const Insights = () => {
               <Text className="text-lg font-sans-bold text-primary">
                 {item.name}
               </Text>
+
               <Text className="text-sm font-sans-semibold text-black/60">
                 {item.date}
               </Text>
@@ -122,6 +128,7 @@ const Insights = () => {
               <Text className="text-lg font-sans-bold text-primary">
                 ${item.price.toFixed(2)}
               </Text>
+
               <Text className="text-sm font-sans-medium text-black/60">
                 per month
               </Text>
