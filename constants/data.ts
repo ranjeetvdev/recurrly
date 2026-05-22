@@ -13,7 +13,7 @@ export const HOME_USER = {
 
 export const HOME_BALANCE = {
   amount: 2489.48,
-  nextRenewalDate: "2026-04-18T09:00:00.000Z",
+  nextRenewalDate: "2026-05-25T09:00:00.000Z",
 };
 
 export const UPCOMING_SUBSCRIPTIONS: UpcomingSubscription[] = [
@@ -52,11 +52,11 @@ export const HOME_SUBSCRIPTIONS: Subscription[] = [
     category: "Design",
     paymentMethod: "Visa ending in 8530",
     status: "active",
-    startDate: "2025-03-20T10:00:00.000Z",
-    price: 77.49,
+    startDate: "2025-05-01T10:00:00.000Z",
+    price: 79.99,
     currency: "USD",
     billing: "Monthly",
-    renewalDate: "2026-03-20T10:00:00.000Z",
+    renewalDate: "2026-06-01T10:00:00.000Z",
     color: "#f5c542",
   },
   {
@@ -67,11 +67,11 @@ export const HOME_SUBSCRIPTIONS: Subscription[] = [
     category: "Developer Tools",
     paymentMethod: "Mastercard ending in 2408",
     status: "active",
-    startDate: "2024-11-24T10:00:00.000Z",
-    price: 9.99,
+    startDate: "2026-05-09T10:00:00.000Z",
+    price: 59.99,
     currency: "USD",
     billing: "Monthly",
-    renewalDate: "2026-03-24T10:00:00.000Z",
+    renewalDate: "2026-06-09T10:00:00.000Z",
     color: "#e8def8",
   },
   {
@@ -82,11 +82,11 @@ export const HOME_SUBSCRIPTIONS: Subscription[] = [
     category: "AI Tools",
     paymentMethod: "Amex ending in 1010",
     status: "paused",
-    startDate: "2025-06-27T10:00:00.000Z",
-    price: 20.0,
+    startDate: "2026-05-15T10:00:00.000Z",
+    price: 49.99,
     currency: "USD",
     billing: "Monthly",
-    renewalDate: "2026-03-27T10:00:00.000Z",
+    renewalDate: "2026-06-15T10:00:00.000Z",
     color: "#b8d4e3",
   },
   {
@@ -97,11 +97,11 @@ export const HOME_SUBSCRIPTIONS: Subscription[] = [
     category: "Design",
     paymentMethod: "Visa ending in 7784",
     status: "cancelled",
-    startDate: "2024-04-02T10:00:00.000Z",
+    startDate: "2026-05-21T10:00:00.000Z",
     price: 119.99,
     currency: "USD",
     billing: "Yearly",
-    renewalDate: "2026-04-02T10:00:00.000Z",
+    renewalDate: "2026-06-21T10:00:00.000Z",
     color: "#b8e8d0",
   },
 ];
